@@ -1,6 +1,6 @@
-﻿using FoodDelivery.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnlineFoodDelivery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

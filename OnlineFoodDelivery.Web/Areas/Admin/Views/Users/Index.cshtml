@@ -1,0 +1,18 @@
+﻿@using OnlineFoodDelivery.Models
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<br/><br/>
+<div class="card">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="card-title">All Users</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">Register</a>
+        </div>
+    </div>
+</div>

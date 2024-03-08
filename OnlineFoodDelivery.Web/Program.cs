@@ -34,7 +34,7 @@ namespace OnlineFoodDelivery.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            DataSedding();
+            DataSeeding();
             app.UseRouting();
             app.UseAuthentication(); ;
 
@@ -45,7 +45,7 @@ namespace OnlineFoodDelivery.Web
                 pattern: "{area=admin}/{controller=categories}/{action=Index}/{id?}");
 
             app.Run();
-            void DataSedding()
+            void DataSeeding()
             {
                 using (var scope = app.Services.CreateScope())
                 {

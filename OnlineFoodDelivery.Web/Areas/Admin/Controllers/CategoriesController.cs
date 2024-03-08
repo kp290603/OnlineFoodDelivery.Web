@@ -1,5 +1,5 @@
-﻿using FoodDelivery.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineFoodDelivery.Models;
 using OnlineFoodDelivery.Repository;
 using OnlineFoodDelivery.Web.ViewModels;
 
@@ -22,7 +22,7 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
                 Id = x.Id,
                 Title = x.Title
             }).ToList();
-            return View();
+            return View(listFromDb);
         }
         [HttpGet]
         public IActionResult Create()
