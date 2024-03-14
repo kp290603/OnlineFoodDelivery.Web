@@ -55,7 +55,7 @@ namespace OnlineFoodDelivery.Web
             app.MapControllerRoute(
                 name: "default",
                 //pattern: "{area=Customer}/{controller=Carts}/{action=Index}/{id?}");
-                pattern: "{area=customer}/{controller=Homes}/{action=Index}/{id?}");
+                pattern: "{area=customer}/{controller=Homes}/{action=Home}/{id?}");
                 //pattern: "{area=admin}/{controller=categories}/{action=Index}/{id?}");
                 //pattern: "{controller=Home}/{action=Index}/{id?}");
             app.Run();

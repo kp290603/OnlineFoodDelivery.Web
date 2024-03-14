@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Order Being Prepared";
+    Layout = null; // No need for layout since this is a standalone page
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Order is Being Prepared</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #343a40; /* Dark background color */
+            color: #fff; /* Light text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto 10px auto;
+            padding: 20px;
+            background-color: #495057; /* Darker background color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            text-align: center; /* Center align content */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        #download-button {
+            margin-top: 20px;
+        }
+
+        iframe {
+            display: block; /* Ensure iframe is block-level */
+            margin: 0 auto 10px auto; /* Center align iframe */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Whoaa!! Order placed</h1>
+        <br />
+        <h1>Your order is being prepared</h1>
+        <div id="timer">Redirecting to homepage in <span id="countdown">30</span> seconds...</div>
+        <div id="download-button">
+            <a href="@Url.Action("DownloadBillingDetails", "Carts")" class="btn btn-success" style="text-decoration:none; color:white">Download Billing Details</a>
+        </div>
+    </div>
+    <iframe src="https://lottie.host/embed/10b8e406-865d-4475-bfd3-92dec5b624fe/CV9HLPVZeW.json" width="300" height="300"></iframe>
+
+    <script>
+        // Countdown timer for redirection
+        var seconds = 30;
+        setInterval(function () {
+            seconds--;
+            document.getElementById("countdown").textContent = seconds;
+            if (seconds <= 0) {
+                window.location.href = '@Url.Action("Index", "Homes")'; // Redirect to homepage
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

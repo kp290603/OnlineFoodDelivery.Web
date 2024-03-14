@@ -1,41 +1,64 @@
 ﻿@* @model OnlineFoodDelivery.Web.ViewModels.CartItemViewModel *@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Your Cart";
 }
 @model List<OnlineFoodDelivery.Web.ViewModels.CartItemViewModel>
 
-
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .table {
-            margin-bottom: 30px;
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: #fff; /* Light text color */
+            font-family: Arial, sans-serif;
         }
 
+        .container {
+            margin-top: 50px;
+        }
+
+        .table {
+            margin-bottom: 30px;
+            background-color: #495057; /* Darker background color for table */
+            color: #fff; /* Light text color for table */
+        }
+
+            .table th,
+            .table td {
+                border-color: #dee2e6; /* Light border color */
+            }
+
         .btn-update {
-            background-color: #28a745;
+            background-color: #28a745; /* Green update button */
             color: white;
         }
 
         .btn-remove {
-            background-color: #dc3545;
+            background-color: #dc3545; /* Red remove button */
             color: white;
         }
 
         .total-amount {
             font-size: 24px;
             font-weight: bold;
+            color: #28a745; /* Green total amount text */
+        }
+
+        .btn-proceed {
+            background-color: #007bff; /* Blue proceed button */
+            color: white;
+        }
+
+        .btn-proceed:hover {
+                background-color: #0056b3; /* Darker blue on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center mt-5">Your Cart</h2>
+        <h2 class="text-center">Your Cart</h2>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
@@ -76,10 +99,8 @@
             </table>
         </div>
         <div class="text-center">
-            <a href="@Url.Action("Checkout", "Carts")" class="btn btn-primary">Proceed to Checkout</a>
+            <a href="@Url.Action("Checkout", "Carts")" class="btn btn-proceed">Proceed to Checkout</a>
         </div>
-       
-
     </div>
 </body>
 </html>

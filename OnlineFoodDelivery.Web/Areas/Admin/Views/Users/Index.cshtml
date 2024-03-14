@@ -5,37 +5,43 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 @if (UserManager.GetUserName(User) == "admin@gmail.com")
 {
-    <h1>Index</h1>
-    <br/><br/>
-    <div class="card">
-        <div class="col-6">
-            <h2 class="card-title">All Users</h2>
+    <h1 class="text-center">All Users</h1>
+    <div class="container mt-5">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Postal Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Name</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.Address</td>
+                                    <td>@user.City</td>
+                                    <td>@user.PostalCode</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <table>
-            <tr>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postal Code</th>
-                <!-- Add more table headers for other columns if needed -->
-            </tr>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Email</td>
-                    <td>@user.Address</td>
-                    <td>@user.City</td>
-                    <td>@user.PostalCode</td>
-                    <!-- Add more table cells for other columns if needed -->
-                </tr>
-            }
-        </table>
-
-        <div class="row">       
+    </div>
+    <div class="container mt-3">
+        <div class="row justify-content-end">
             <div class="col-6 text-right">
                 <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">Register</a>
             </div>
@@ -44,5 +50,5 @@
 }
 else
 {
-    <h1>Oops! Error Occured</h1>
+    <h1>Oops! Error Occurred</h1>
 }

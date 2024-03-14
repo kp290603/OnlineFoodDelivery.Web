@@ -4,12 +4,13 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 @if (UserManager.GetUserName(User) == "admin@gmail.com")
 {
-    <h1 class="mb-4">Food Items</h1>
+    <h1 class="mb-4 text-center" style="color: #fff;">Food Items</h1>
 
     <div class="row mb-3">
-        <div class="col">
+        <div class="col text-center">
             <a asp-action="Create" class="btn btn-success">Add New Item</a>
         </div>
     </div>
@@ -18,7 +19,7 @@
         @foreach (var item in Model)
         {
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
+                <div class="card bg-dark text-light">
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
                         <p class="card-text">@item.Description</p>
@@ -34,7 +35,6 @@
                                     <img src="@imgsrc" height="50" width="50" style="border-radius:100%" />
                                 }
                             }
-                            @* <img src="@imgsrc" height="50" width="50" style="border-radius:100%" /> *@
                         </p>
 
                     </div>

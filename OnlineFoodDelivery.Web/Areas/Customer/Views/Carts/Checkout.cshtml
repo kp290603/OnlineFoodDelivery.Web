@@ -2,11 +2,12 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Details";
 }
 @model List<OnlineFoodDelivery.Web.ViewModels.CartItemViewModel>
 <h2>Checkout</h2>
 
-<table class="table">
+<table class="table" style="color:white">
     <thead>
         <tr>
             <th>Item</th>
@@ -65,13 +66,9 @@
             </select>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Submit Order</button>
+        <a href="@Url.Action("OrderConfirmation", "Carts")" class="btn btn-success">Submit Order</a>
     </form>
     <br />
-    <div>
-        <!-- Other content -->
-        <a href="@Url.Action("DownloadBillingDetails", "Carts")" class="btn btn-success">Download Billing Details</a>
-    </div>
 </div>
 @section Scripts {
     <script>

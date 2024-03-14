@@ -197,6 +197,7 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
         public IActionResult OrderConfirmation()
         {
+            HttpContext.Session.Clear();
             // Display order confirmation view
             return View();
         }

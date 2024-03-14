@@ -1,9 +1,10 @@
-﻿@model OnlineFoodDelivery.Web.ViewModels.CategoryViewModel
-
+﻿@using Microsoft.AspNetCore.Identity
+@model OnlineFoodDelivery.Web.ViewModels.CategoryViewModel
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Edit";
 }
-
+@if (UserManager.GetUserName(User) == "admin@gmail.com"){
 <h1>Edit</h1>
 
 <h4>CategoryViewModel</h4>
@@ -31,4 +32,9 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+}
+else
+{
+    <h1>Oops! Error Occured</h1>
 }

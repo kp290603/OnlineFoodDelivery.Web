@@ -5,23 +5,95 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OnlineFoodDelivery.Web</title>
+    <title>@ViewData["Title"] - Foodiezz</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/OnlineFoodDelivery.Web.styles.css" asp-append-version="true" />
+    <style>
+        /* Custom Dark Theme Styles */
+        body {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #212529 !important;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+            .navbar-light .navbar-nav .nav-link:hover {
+                color: #fff !important;
+            }
+
+        .navbar-light .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-light .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .footer {
+            background-color: #212529;
+            color: #fff;
+        }
+
+        .form-control {
+            background-color: #495057;
+            border-color: #495057;
+            color: #fff;
+        }
+
+            .form-control:focus {
+                background-color: #495057;
+                border-color: #495057;
+                color: #fff;
+            }
+
+        .btn-primary {
+            background-color: #ff7f50;
+            border-color: #ff7f50;
+            color: #fff;
+        }
+
+            .btn-primary:hover {
+                background-color: #cc6f3c;
+                border-color: #cc6f3c;
+                color: #fff;
+            }
+
+        .nav-link {
+            color: #fff !important;
+        }
+
+            .nav-link:hover {
+                color: #ff7f50 !important;
+            }
+
+        .link {
+            color: #ff7f50;
+            text-decoration: none;
+        }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineFoodDelivery.Web</a>
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Homes" asp-action="Home">Foodiezz</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="Home">Home</a>
                         </li>
@@ -42,38 +114,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
                             </li>
-                            @* <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Coupons" asp-action="Index">Coupon</a>
-                            </li> *@
-
                         }
-@*                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="categories" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="SubCategories" asp-action="Index">SubCategory</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Items" asp-action="Index">Item</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Coupons" asp-action="Index">Coupon</a>
-                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="Index">Items</a>
                         </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">@await Component.InvokeAsync("Cart")</a>
-                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Carts" asp-action="Index">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                </svg> Cart
+                                Cart
                             </a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -86,7 +137,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - OnlineFoodDelivery.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Foodiezz - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-muted" style="text-decoration:none;">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -95,3 +146,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
