@@ -5,7 +5,14 @@
 }
 
 <h1>Edit</h1>
-
+<div class="col-12 border">
+    @if (Model.Image != null)
+    {
+        var base64 = Convert.ToBase64String(Model.Image);
+        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+        <img src="@imgsrc" height="100" width="100" />
+    }
+</div>
 <h4>ItemViewModel</h4>
 <hr />
 <div class="row">
@@ -40,6 +47,11 @@
                     <option>Select SubCategory</option>
                 </select>
                 <span asp-validation-for="SubCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input type="file" name="files" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

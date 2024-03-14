@@ -1,0 +1,95 @@
+﻿@* @model IEnumerable<OnlineFoodDelivery.Web.ViewModels.ItemViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1 class="mb-4">Food Items</h1>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">
+                        @{
+                            if (item.Image != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                <img src="@imgsrc" height="150" width="150" style="border-radius:100%; align-items:center" />
+                            }
+                        }
+                    </p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text"><strong>Price: </strong>@item.Price</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+ *@
+ @model OnlineFoodDelivery.Web.ViewModels.ItemCategoryViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1 class="mb-4">Food Items</h1>
+
+@* Dropdown list to select category *@
+@using (Html.BeginForm("Index", "Homes", FormMethod.Get))
+{
+    <div class="mb-4">
+        <label for="categoryId">Select Category:</label>
+        <select id="categoryId" name="categoryId" class="form-control">
+            <option value="">All Categories</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.Id">@category.Title</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary mt-2">Filter</button>
+    </div>
+}
+
+<div class="row" id="itemList">
+    @foreach (var item in Model.Items)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">
+                        @{
+                            if (item.Image != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                <img src="@imgsrc" height="150" width="150" style="border-radius:100%; align-items:center" />
+                            }
+                        }
+                    </p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text"><strong>Price: </strong>@item.Price</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

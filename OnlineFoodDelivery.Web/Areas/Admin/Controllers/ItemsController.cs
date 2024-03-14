@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineFoodDelivery.Models;
@@ -8,6 +9,7 @@ using OnlineFoodDelivery.Web.ViewModels;
 namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -31,7 +33,8 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
                     CategoryId = model.CategoryId,
                     SubCategoryId = model.SubCategoryId,
                     Category = model.Category,
-                    SubCategory = model.SubCategory
+                    SubCategory = model.SubCategory,
+                    Image=model.Image
                 }).ToList();
 
             return View(items);
@@ -54,24 +57,28 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
             return Json(subCategory);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(ItemViewModel vm)
+        public IActionResult Create(ItemViewModel vm)
         {
             Item model = new Item();
             if (ModelState.IsValid)
             {
-                if(vm.ImageUrl != null && vm.ImageUrl.Length > 0)
+                var files = Request.Form.Files;
+                byte[] photo = null;
+                using (var filestream = files[0].OpenReadStream())
                 {
-                    var uploadDir = @"Images/Items";
-                    var filename = Guid.NewGuid().ToString() + "-" + vm.ImageUrl.FileName;
-                    var path = Path.Combine(_webHostEnvironment.WebRootPath,uploadDir, filename);
-                    await vm.ImageUrl.CopyToAsync(new FileStream(path, FileMode.Create));
-                    model.Image = "/" + uploadDir + "/" + filename;
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        filestream.CopyTo(memoryStream);
+                        photo = memoryStream.ToArray();
+                    }
                 }
+                vm.Image= photo;
                 model.Price = vm.Price;
                 model.Description = vm.Description;
                 model.Title = vm.Title;
                 model.CategoryId = vm.CategoryId;
                 model.SubCategoryId = vm.SubCategoryId; 
+                model.Image = vm.Image;
                 _context.Items.Add(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,12 +90,21 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.Category = new SelectList(_context.Categories, "Id", "Title", item.CategoryId);
-            ViewBag.SubCategory = new SelectList(_context.SubCategories, "Id", "Title",item.SubCategoryId);
+            //var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
+            //ItemViewModel viewModel = new ItemViewModel();
+            var viewModel = _context.Items.Where(x => x.Id == id).Select(x => new ItemViewModel()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Description = x.Description,
+                Image = x.Image,
+                Price = x.Price
+            }).FirstOrDefault();
+            ViewBag.Category = new SelectList(_context.Categories, "Id", "Title", viewModel.CategoryId);
+            ViewBag.SubCategory = new SelectList(_context.SubCategories, "Id", "Title",viewModel.SubCategoryId);
 
 
-            return View();
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Edit(ItemViewModel vm)
@@ -96,12 +112,27 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
             Item model = _context.Items.Where(x => x.Id == vm.Id).FirstOrDefault();
             if (ModelState.IsValid)
             {
+                var files = Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    byte[] photo = null;
+                    using (var filestream = files[0].OpenReadStream())
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            filestream.CopyTo(memoryStream);
+                            photo = memoryStream.ToArray();
+                        }
+                    }
+                    model.Image= photo;
+                }
                 //var model = _context.Items.FirstOrDefault(x => x.Id == vm.Id);
                 model.Title = vm.Title;
                 model.Description= vm.Description;
                 model.Price = vm.Price;
                 model.CategoryId = vm.CategoryId;
                 model.SubCategoryId = vm.SubCategoryId;
+                model.Image = vm.Image;
                 _context.Items.Update(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,6 +150,22 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var item = _context.Items
+                                .Include(i => i.Category)
+                                .Include(i => i.SubCategory)
+                                .FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            string base64Image = Convert.ToBase64String(item.Image);
+            ViewBag.ImageData = base64Image;
+            return View(item);
         }
     }
 }

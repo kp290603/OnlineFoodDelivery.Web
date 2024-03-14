@@ -1,0 +1,85 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<OnlineFoodDelivery.Web.ViewModels.CartItemViewModel>
+<h2>Checkout</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Item.Title</td>
+                <td>@item.Item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Item.Price * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <h4>Total Amount: ₹@ViewData["TotalAmount"]</h4>
+</div>
+
+@* Add your checkout form or button here *@
+<a href="#" id="confirmOrderBtn" class="btn btn-primary">Confirm Order</a>
+<br />
+<br />
+
+<div id="billingDetailsForm" style="display: none;">
+    <h3>Billing Details</h3>
+    <form asp-action="SubmitOrder" method="post">
+        <div class="form-group">
+            <label for="FullName">Full Name</label>
+            <input type="text" id="FullName" name="FullName" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <textarea id="Address" name="Address" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="tel" id="PhoneNumber" name="PhoneNumber" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="PaymentMethod">Payment Method</label>
+            <select id="PaymentMethod" name="PaymentMethod" class="form-control" required>
+                <option value="CreditCard">Credit Card</option>
+                <option value="DebitCard">Debit Card</option>
+                <option value="Cash">Cash on Delivery</option>
+            </select>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+    </form>
+    <br />
+    <div>
+        <!-- Other content -->
+        <a href="@Url.Action("DownloadBillingDetails", "Carts")" class="btn btn-success">Download Billing Details</a>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        // When "Confirm Order" button is clicked
+        document.getElementById("confirmOrderBtn").addEventListener("click", function () {
+            alert("Please enter your billing details to complete the order.");
+            // Show the billing details form
+            document.getElementById("billingDetailsForm").style.display = "block";
+        });
+    </script>
+}

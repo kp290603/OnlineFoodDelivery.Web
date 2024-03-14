@@ -1,0 +1,85 @@
+﻿@* @model OnlineFoodDelivery.Web.ViewModels.CartItemViewModel *@
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<OnlineFoodDelivery.Web.ViewModels.CartItemViewModel>
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table {
+            margin-bottom: 30px;
+        }
+
+        .btn-update {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-remove {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">Your Cart</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Item.Title</td>
+                            <td>₹@item.Item.Price</td>
+                            <td>
+                                <form asp-action="UpdateQuantity" asp-controller="Carts">
+                                    <input type="hidden" name="PId" value="@item.Item.Id" />
+                                    <input type="number" name="Quantity" value="@item.Quantity" min="1" />
+                                    <button type="submit" class="btn btn-update">Update</button>
+                                </form>
+                            </td>
+                            <td>₹@(item.Item.Price * item.Quantity)</td>
+                            <td>
+                                <a href="@Url.Action("RemoveFromCart","Carts",new{@PId = item.Item.Id})" class="btn btn-remove">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right"><h4>Total Amount:</h4></td>
+                        <td colspan="2"><h4 class="total-amount">₹@(Model.Sum(item => item.Item.Price * item.Quantity))</h4></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="text-center">
+            <a href="@Url.Action("Checkout", "Carts")" class="btn btn-primary">Proceed to Checkout</a>
+        </div>
+       
+
+    </div>
+</body>
+</html>

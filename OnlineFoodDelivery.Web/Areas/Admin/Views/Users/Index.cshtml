@@ -1,18 +1,48 @@
-﻿@using OnlineFoodDelivery.Models
+﻿@using Microsoft.AspNetCore.Identity
+@using OnlineFoodDelivery.Models
+@inject UserManager<IdentityUser> UserManager
 @model IEnumerable<ApplicationUser>
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-<br/><br/>
-<div class="card">
-    <div class="row">
+@if (UserManager.GetUserName(User) == "admin@gmail.com")
+{
+    <h1>Index</h1>
+    <br/><br/>
+    <div class="card">
         <div class="col-6">
             <h2 class="card-title">All Users</h2>
         </div>
-        <div class="col-6 text-right">
-            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">Register</a>
+        <table>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postal Code</th>
+                <!-- Add more table headers for other columns if needed -->
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Address</td>
+                    <td>@user.City</td>
+                    <td>@user.PostalCode</td>
+                    <!-- Add more table cells for other columns if needed -->
+                </tr>
+            }
+        </table>
+
+        <div class="row">       
+            <div class="col-6 text-right">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">Register</a>
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <h1>Oops! Error Occured</h1>
+}

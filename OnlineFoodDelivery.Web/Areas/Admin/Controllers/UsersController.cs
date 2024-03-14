@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineFoodDelivery.Models;
 using OnlineFoodDelivery.Repository;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -14,13 +19,12 @@ namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            var x = _context.ApplicationUsers.Where(x => x.Id != claim.Value).ToList();
-            return View(x);
+            var users = _context.ApplicationUsers.ToList();
+ 
 
+            return View(users);
         }
     }
 }

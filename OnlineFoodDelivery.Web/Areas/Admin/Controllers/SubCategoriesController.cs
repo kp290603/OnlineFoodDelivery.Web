@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineFoodDelivery.Models;
@@ -8,6 +9,7 @@ using OnlineFoodDelivery.Web.ViewModels;
 namespace OnlineFoodDelivery.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SubCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;

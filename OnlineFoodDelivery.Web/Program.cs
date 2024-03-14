@@ -21,6 +21,17 @@ namespace OnlineFoodDelivery.Web
             builder.Services.AddScoped<IDbIntializer, DbIntializer>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddRazorPages();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Identity/Account/Login";
+            });
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -36,14 +47,17 @@ namespace OnlineFoodDelivery.Web
             app.UseStaticFiles();
             DataSeeding();
             app.UseRouting();
-            app.UseAuthentication(); ;
+            app.UseAuthentication(); 
 
             app.UseAuthorization();
+            app.UseSession();
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=admin}/{controller=categories}/{action=Index}/{id?}");
-
+                //pattern: "{area=Customer}/{controller=Carts}/{action=Index}/{id?}");
+                pattern: "{area=customer}/{controller=Homes}/{action=Index}/{id?}");
+                //pattern: "{area=admin}/{controller=categories}/{action=Index}/{id?}");
+                //pattern: "{controller=Home}/{action=Index}/{id?}");
             app.Run();
             void DataSeeding()
             {

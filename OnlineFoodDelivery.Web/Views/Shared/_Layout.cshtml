@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,13 +21,33 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
+                        @if (UserManager.GetUserName(User) == "admin@gmail.com")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="categories" asp-action="Index">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="SubCategories" asp-action="Index">SubCategory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Items" asp-action="Index">Item(Admin)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                            @* <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Coupons" asp-action="Index">Coupon</a>
+                            </li> *@
+
+                        }
+@*                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="categories" asp-action="Index">Category</a>
                         </li>
                         <li class="nav-item">
@@ -36,6 +58,19 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Coupons" asp-action="Index">Coupon</a>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="Index">Items</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Cart" asp-action="Index">@await Component.InvokeAsync("Cart")</a>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Carts" asp-action="Index">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                </svg> Cart
+                            </a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial"/>
