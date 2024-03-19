@@ -26,6 +26,10 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
         {
             return View();
         }
+        public IActionResult ItemSuggestion()
+        {
+            return View(null);
+        }
         [HttpGet]
         public IActionResult Index(int? categoryId)
         {

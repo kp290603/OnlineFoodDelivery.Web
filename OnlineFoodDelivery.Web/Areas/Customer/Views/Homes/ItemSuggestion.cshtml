@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Mood Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #343a40; /* Dark background color */
+            color: #fff; /* Light text color */
+        }
+
+        .container1 {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #495057; /* Darker container background color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* White shadow */
+            text-align: center; /* Center align content */
+        }
+
+        h1 {
+            color: #fff; /* White heading color */
+            margin-bottom: 20px; /* Add spacing below heading */
+        }
+
+        .mood-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Add spacing below buttons */
+        }
+
+        .mood-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50; /* Green button color */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        }
+
+            .mood-button:hover {
+                background-color: #45a049; /* Darker green on hover */
+            }
+
+        .result {
+            text-align: center;
+        }
+
+            .result h2 {
+                color: #fff; /* White heading color */
+                margin-bottom: 10px; /* Add spacing below heading */
+                font-size: 24px; /* Larger font size */
+                font-weight: bold; /* Bold font weight */
+            }
+
+            .result p {
+                color: #ccc; /* Lighter paragraph color */
+                margin: 0; /* Remove default margin */
+                font-size: 30px; /* Larger font size */
+            }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1>Food Mood Suggestions</h1>
+        <div class="mood-buttons">
+            <button class="mood-button" onclick="getSuggestions('happy')">Happy</button>
+            <button class="mood-button" onclick="getSuggestions('sad')">Sad</button>
+            <button class="mood-button" onclick="getSuggestions('hungry')">Hungry</button>
+            <button class="mood-button" onclick="getSuggestions('excited')">Excited</button>
+            <button class="mood-button" onclick="getSuggestions('stressed')">Stressed</button>
+        </div>
+        <div class="result" id="suggestions">
+            <!-- Suggestions will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function getSuggestions(mood) {
+            var suggestions = document.getElementById('suggestions');
+
+            // You can implement your logic to fetch food suggestions based on mood here
+            // For demo, let's just display a set of predefined messages
+            var messages = [];
+            switch (mood) {
+                case 'happy':
+                    messages = ["How about some ice cream?", "How about a slice of cake?", "Maybe some cookies?"];
+                    break;
+                case 'sad':
+                    messages = ["Maybe some comfort food like mac and cheese?", "How about a warm bowl of soup?", "Some chocolate might cheer you up!"];
+                    break;
+                case 'hungry':
+                    messages = ["A hearty burger might do the trick!", "How about a big bowl of pasta?", "Maybe some tacos?"];
+                    break;
+                case 'excited':
+                    messages = ["Treat yourself with some pizza!", "How about a fancy dinner?", "Maybe some sushi?"];
+                    break;
+                case 'stressed':
+                    messages = ["Relax with some chocolate!", "How about a cup of tea?", "Maybe a soothing bowl of oatmeal?"];
+                    break;
+                default:
+                    messages = ["Hmm... something went wrong. Please try again later."];
+            }
+
+            var currentIndex = 0;
+            var interval = setInterval(function () {
+                suggestions.innerHTML = '<h2>Recommended Food:</h2><p>' + messages[currentIndex] + '</p>';
+                currentIndex = (currentIndex + 1) % messages.length;
+            }, 100); // Change suggestion every 2 seconds
+
+            // Stop changing suggestions after 10 seconds (10 * 1000 milliseconds)
+            setTimeout(function () {
+                clearInterval(interval);
+                suggestions.innerHTML = '<h2>Recommended Food:</h2><p>' + messages[currentIndex] + '</p>';
+            }, 5000); // Display final suggestion after 10 seconds
+        }
+    </script>
+</body>
+</html>

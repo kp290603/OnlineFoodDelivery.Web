@@ -50,6 +50,7 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-sXemQ2qAspUO2Wt/rNLM/Q4loXdJ7py5t5lOH0DN2ZrOqkJK6TTvWSEpnT/GaWfvF2SHz68y2VPgWF/RYr1Z6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Dark theme styles */
         body {
@@ -113,12 +114,51 @@
         .card-text, .card-footer {
             color: #ced4da;
         }
+        .notification {
+            position: fixed;
+            top: 10%;
+            right: -300px; /* Initially off-screen */
+            width: 300px; /* Width of the notification */
+            height: 80px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease, right 0.5s ease;
+            animation: slideInRight 0.5s ease forwards; /* Animation for initial appearance */
+            margin-right:10px;
+        }
+
+        .notification.show {
+            right: 0; /* Slide to the right side */
+            opacity: 1;
+        }
+
+        .close {
+            color: #ccc;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close:hover {
+                color: #fff;
+            }
     </style>
 </head>
 <body>
+    <div id="notificationBanner" class="notification">
+        <span class="close" onclick="closeNotification()">&times;</span>
+        <span id="notificationMessage"></span>
+        <a class="nav-link text-dark" asp-area="Customer" asp-controller="Homes" asp-action="ItemSuggestion">Try our Food Suggester</a>
+        
+    </div>
     <div class="container">
         <h1 class="mb-4 text-center">Food Items</h1>
-
+        
         @* Dropdown list to select category *@
         @using (Html.BeginForm("Index", "Homes", FormMethod.Get))
         {
@@ -139,8 +179,9 @@
             @foreach (var item in Model.Items)
             {
                 <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
-                    <div class="card" >
+                    <div class="card">
                         <div class="card-body">
+                            <a href="@Url.Action("Details", new { id = item.Id })" style="text-decoration:none; cursor:default;">
                             <h5 class="card-title" style="margin-bottom:20px;"><b>@item.Title</b></h5>
                             <p class="card-text">
                                 @{
@@ -154,14 +195,58 @@
                             </p>
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><strong class="text-white">₹ </strong>@item.Price</p>
+                            </a>
                         </div>
                         <div class="card-footer">
-                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">Details</a>
+                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                </svg> Details
+                            </a>
+                            <span>&nbsp;</span>
+                            <a href="@Url.Action("AddToCart","Carts",new{PId = item.Id})" class="btn btn-primary btn-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                                    <path d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                </svg>  Add to Cart </a>
+                            
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
+<script>
+    function showNotification(message) {
+        var notificationBanner = document.getElementById("notificationBanner");
+        var notificationMessage = document.getElementById("notificationMessage");
+        notificationMessage.innerHTML = message;
+
+        setTimeout(function () {
+            notificationBanner.classList.add("show");
+        }, 1000);
+
+        // Check if notification has been shown before
+        var notificationShown = localStorage.getItem("notificationShown");
+        if (!notificationShown) {
+            // Show the notification
+            localStorage.setItem("notificationShown", true);
+        } else {
+            // Notification has been shown before, hide it after 5 seconds
+            setTimeout(function () {
+                closeNotification();
+            }, 5000); // 5 seconds in milliseconds
+        }
+    }
+
+    function closeNotification() {
+        var notificationBanner = document.getElementById("notificationBanner");
+        notificationBanner.classList.remove("show");
+    }
+
+    // Call showNotification automatically
+    showNotification('Confused what to order!!');
+</script>
+
 </body>
 </html>

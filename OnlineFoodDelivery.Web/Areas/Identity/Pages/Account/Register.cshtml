@@ -57,6 +57,7 @@
     body {
         background-color: #343a40;
         color: #fff;
+        margin-bottom:150px;
     }
 
     .register-container {
@@ -64,6 +65,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        margin-top: 100px;
     }
 
     .register-form {
@@ -134,9 +136,6 @@
         color: white;
     }
 </style>
-
-<h1 class="text-center">@ViewData["Title"]</h1>
-
 <div class="register-container">
     <div class="register-form">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">

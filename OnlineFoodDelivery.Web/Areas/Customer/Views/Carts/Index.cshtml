@@ -23,21 +23,31 @@
             margin-bottom: 30px;
             background-color: #495057; /* Darker background color for table */
             color: #fff; /* Light text color for table */
+            border-collapse: collapse; /* Collapse borders */
         }
 
             .table th,
             .table td {
-                border-color: #dee2e6; /* Light border color */
+                border: 1px solid #adb5bd; /* Lighter border color */
+                padding: 8px; /* Padding for cells */
             }
 
         .btn-update {
             background-color: #28a745; /* Green update button */
             color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .btn-remove {
             background-color: #dc3545; /* Red remove button */
             color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .total-amount {
@@ -49,10 +59,42 @@
         .btn-proceed {
             background-color: #007bff; /* Blue proceed button */
             color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .btn-proceed:hover {
-                background-color: #0056b3; /* Darker blue on hover */
+            .btn-proceed:hover {
+                background-color: #0056b3;
+                color:white;
+            }
+
+        th {
+            background-color: #343a40; /* Dark background color for table header */
+            text-align: left;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+        }
+        tr:nth-child(even) {
+            background-color: #495057; /* Darker background color for even rows */
+        }
+
+        tr:nth-child(odd) {
+            background-color: #343a40; /* Dark background color for odd rows */
+        }
+
+        .quantity-input {
+            width: 50px; /* Adjust input width */
+            text-align: center; /* Center text within input */
+            border: 1px solid #adb5bd; /* Lighter border color */
+            border-radius: 4px; /* Rounded corners */
+            background-color: #495057; /* Darker background color */
+            color: #fff; /* Light text color */
         }
     </style>
 </head>
@@ -60,7 +102,7 @@
     <div class="container">
         <h2 class="text-center">Your Cart</h2>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -79,7 +121,7 @@
                             <td>
                                 <form asp-action="UpdateQuantity" asp-controller="Carts">
                                     <input type="hidden" name="PId" value="@item.Item.Id" />
-                                    <input type="number" name="Quantity" value="@item.Quantity" min="1" />
+                                    <input type="number" name="Quantity" value="@item.Quantity" min="1" class="quantity-input" />
                                     <button type="submit" class="btn btn-update">Update</button>
                                 </form>
                             </td>
