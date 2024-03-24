@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using OnlineFoodDelivery.Models;
 using OnlineFoodDelivery.Repository;
 using OnlineFoodDelivery.Web.ViewModels;
+using Stripe.Checkout;
 using System.Security.Claims;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 {
@@ -140,31 +142,6 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             return RedirectToAction("Index");
         }
-        //public IActionResult Checkout()
-        //{
-        //    var cart = HttpContext.Session.GetString("Cart");
-        //    List<CartItemViewModel> Cart = cart != null ? JsonConvert.DeserializeObject<List<CartItemViewModel>>(cart) : new List<CartItemViewModel>();
-
-        //    // Calculate total amount
-        //    double totalAmount = 0;
-        //    foreach (var cartItem in Cart)
-        //    {
-        //        totalAmount += cartItem.Item.Price * cartItem.Quantity;
-        //    }
-
-        //    // Retrieve user information
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var user = _context.Users.FirstOrDefault(u => u.Id == userId);
-
-        //    // Create a view model for billing
-        //    BillingViewModel billingViewModel = new BillingViewModel
-        //    {
-        //        Cart = Cart,
-        //        TotalAmount = totalAmount
-        //    };
-
-        //    return View(billingViewModel);
-        //}
         public IActionResult Checkout()
         {
             var cart = HttpContext.Session.GetString("Cart");
@@ -179,9 +156,73 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             ViewData["TotalAmount"] = totalAmount;
 
+            //var domain = "https://localhost:7080/";
+            //var options = new SessionCreateOptions
+            //{
+            //    SuccessUrl = domain + $"Customer/Carts/OrderConfirmation",
+            //    CancelUrl = domain + $"Homes/Home",
+            //    LineItems = new List<SessionLineItemOptions>(),
+            //    Mode="payment"
+            //};
+            //foreach (var item in Cart)
+            //{
+            //    var sessionListItem = new SessionLineItemOptions
+            //    {
+            //        PriceData = new SessionLineItemPriceDataOptions
+            //        {
+            //            UnitAmount = (long)(item.Item.Price*100),
+            //            Currency = "usd",
+            //            ProductData = new SessionLineItemPriceDataProductDataOptions
+            //            {
+            //                Name = item.Item.Title.ToString(),
+            //            }
+            //        },
+            //        Quantity = item.Quantity
+            //    };
+            //    options.LineItems.Add(sessionListItem);
+            //}
+
+            //var service = new SessionService();
+            //Session session = service.Create(options);
+            //Response.Headers.Add("Location", session.Url);
+            //return new StatusCodeResult(303);
             return View(Cart);
         }
+        public IActionResult PaymentGateWay()
+        {
+            var cart = HttpContext.Session.GetString("Cart");
+            List<CartItemViewModel> Cart = cart != null ? JsonConvert.DeserializeObject<List<CartItemViewModel>>(cart) : new List<CartItemViewModel>();
+            var domain = "https://localhost:7080/";
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + $"Customer/Carts/OrderConfirmation",
+                CancelUrl = domain + $"Homes/Home",
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment"
+            };
+            foreach (var item in Cart)
+            {
+                var sessionListItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(item.Item.Price * 100),
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.Item.Title.ToString(),
+                        }
+                    },
+                    Quantity = item.Quantity
+                };
+                options.LineItems.Add(sessionListItem);
+            }
 
+            var service = new SessionService();
+            Session session = service.Create(options);
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303);
+        }
         [HttpPost]
         [Authorize]
         public IActionResult ConfirmOrder()

@@ -3,6 +3,7 @@ using OnlineFoodDelivery.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using OnlineFoodDelivery.Web.Models;
+using Stripe;
 
 namespace OnlineFoodDelivery.Web
 {
@@ -32,6 +33,7 @@ namespace OnlineFoodDelivery.Web
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            
 
             var app = builder.Build();
 
@@ -47,8 +49,8 @@ namespace OnlineFoodDelivery.Web
             app.UseStaticFiles();
             DataSeeding();
             app.UseRouting();
-            app.UseAuthentication(); 
-
+            app.UseAuthentication();
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
             app.UseAuthorization();
             app.UseSession();
             app.MapRazorPages();

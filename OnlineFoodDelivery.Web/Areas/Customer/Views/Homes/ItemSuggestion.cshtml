@@ -114,13 +114,13 @@
             var interval = setInterval(function () {
                 suggestions.innerHTML = '<h2>Recommended Food:</h2><p>' + messages[currentIndex] + '</p>';
                 currentIndex = (currentIndex + 1) % messages.length;
-            }, 100); // Change suggestion every 2 seconds
+            }, 80); // Change suggestion every 2 seconds
 
             // Stop changing suggestions after 10 seconds (10 * 1000 milliseconds)
             setTimeout(function () {
                 clearInterval(interval);
                 suggestions.innerHTML = '<h2>Recommended Food:</h2><p>' + messages[currentIndex] + '</p>';
-            }, 5000); // Display final suggestion after 10 seconds
+            }, 3000); // Display final suggestion after 10 seconds
         }
     </script>
 </body>
