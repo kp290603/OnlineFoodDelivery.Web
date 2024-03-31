@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/OnlineFoodDelivery.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         /* Custom Dark Theme Styles */
         body {
@@ -81,6 +82,9 @@
             .link:hover {
                 text-decoration: underline;
             }
+        .noti{
+            width:30%;
+        }
     </style>
 </head>
 <body>
@@ -135,11 +139,26 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Foodiezz - <a asp-area="Customer" asp-controller="Homes" asp-action="Privacy" class="text-muted" style="text-decoration:none;">Privacy</a>
         </div>
+    </footer> *@
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    &copy; 2024 - Food Ordering - <a asp-area="Customer" asp-controller="Homes" asp-action="Privacy" class="text-muted" style="text-decoration:none;">Privacy Policy</a>
+                </div>
+                <div class="col-md-6 noti">
+                    <a href="#" class="text-white mr-2"><i class="fa fa-instagram"></i></a>
+                    <a href="#" class="text-white mr-2"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#" class="text-white mr-2"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

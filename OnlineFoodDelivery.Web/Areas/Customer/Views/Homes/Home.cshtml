@@ -41,6 +41,191 @@
     <span class="close" onclick="closeNotification()">&times;</span>
 </div>
  *@
+
+<style>
+    /* Your existing styles remain unchanged */
+    /* Additional styles for enhanced UI */
+
+        .btn-primary {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+
+    .services-section {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 100px 0;
+    }
+
+    .service {
+        text-align: center;
+        margin-bottom: 50px;
+        border-bottom: 2px solid #ccc;
+        height:180px;
+    }
+
+        .service:last-child {
+            border-bottom: none;
+        }
+        .service h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .service p {
+            font-size: 1.1rem;
+        }
+
+    .testimonial-section {
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #343a40;
+        padding: 50px 0;
+        width:65%;
+        margin:auto;
+        border-radius:5%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+        .testimonial-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .testimonial-section .carousel-item {
+            text-align: center;
+
+        }
+
+        .testimonial-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-section cite {
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+    .contact-section {
+        background-color: #007bff;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+    .contact-info {
+        margin-top: 30px;
+    }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+            .contact-info p:last-child {
+                margin-bottom: 0;
+            }
+
+    .faq-section {
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .faq {
+        background-color: #fff;
+        border-radius: 50px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin: 20px auto;
+        max-width: 600px;
+        text-align: left;
+        color:black;
+        transition: all 0.3s ease;
+    }
+
+        .faq:hover {
+            transform: scale(1.05);
+        }
+
+        .faq h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+    .faq-item {
+        margin-bottom: 30px;
+    }
+
+        .faq-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+    .community-section {
+        text-align: center;
+        padding: 50px 0;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .community-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .community-icons {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .community-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+            .community-icons li:last-child {
+                margin-right: 0;
+            }
+
+            .community-icons li a {
+                display: block;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                border-radius: 50%;
+                color: #fff;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+        .hello{
+        transition: all 0.3s ease;
+        }
+            .hello:hover{
+                transform: scale(1.05);
+            }
+        .move{
+        position: absolute;
+        top: 660px;
+        left: 150px;
+        width: 68%;
+        }
+</style>
 <div class="text-center">
     <h1 class="display-4">Welcome to Foodiezz</h1>
 </div>
@@ -49,14 +234,153 @@
         <div style="display: flex; flex-direction: column; align-items: center;">
             <h2>Your Food Ordering journey begins here!!</h2>
             <br />
-            
-            <a class="btn btn-lg btn-primary" asp-area="Customer" asp-controller="Homes" asp-action="Index">Explore</a>
+            <div>
+            <a class="btn btn-lg btn-primary" asp-area="Customer" asp-controller="Homes" asp-action="Index">Order Food</a>
+            &nbsp; 
+            &nbsp;
+            &nbsp;
+            <a href="#services" class="btn btn-primary btn-lg">Explore</a>
+            </div>
         </div>
     </div>
     <!-- Embed Lottie animation -->
     @* <iframe src="https://lottie.host/embed/bb7099ed-8032-4ad3-a0f9-28b99b35736d/rXVJvjfhhk.json" width="350" height="350" style="margin-left: 20px; margin-top: 40px;"></iframe> *@
     <iframe src="https://lottie.host/embed/fd01e59d-cca5-4bf4-8d37-0a88719da55f/Gx0WrwuodT.json" width="350" height="350" style="margin-left: 20px; margin-top: 30px;"></iframe>
 </div>
+<br />
+<section id="services" class="services-section py-5">
+    <div class="container">
+        <img src="~/foodphoto.jpeg" alt="foodphoto" style="width:100%; opacity:0.2;"/>
+        <div class="move">
+        <h2 class="text-center mb-5" style="font-size:60px;">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service text-center p-4 shadow">
+                    <h3 class="mb-3">Online Ordering</h3>
+                    <p class="mb-0">Conveniently order your favorite dishes online.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service text-center p-4 shadow">
+                    <h3 class="mb-3">Delivery</h3>
+                    <p class="mb-0">Enjoy doorstep delivery of your food.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service text-center p-4 shadow">
+                    <h3 class="mb-3">Quality Food</h3>
+                    <p class="mb-0">Experience delicious and hygienic meals.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<br />
+<br />
+
+<section class="testimonial-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2>What Our Customers Say</h2>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p class="lead">Great food and fast delivery! Highly recommended.</p>
+                            <img src="~/sanjeev.jpg" alt="Customer" width="200px" height="200px" style="border-radius:50%;">
+                            <cite>- Sanjeev Kapoor</cite>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="lead">Best food ordering service in town. Will order again!</p>
+                            <img src="~/vikaskhanna.jpg" alt="Customer" width="200px" height="200px" style="border-radius:50%;">
+                            <cite>- Vikas Khanna</cite>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="lead">Excellent variety of dishes. Loved every bite!</p>
+                            <img src="~/ranveer.jpg" alt="Customer" width="200px" height="200px" style="border-radius:50%;">
+                            <cite>- Ranveer Brar</cite>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="lead">Superb customer service and quality food. A must-try!</p>
+                            <img src="~/shipra.jpg" alt="Customer" width="200px" height="200px" style="border-radius:50%;">
+                            <cite>- Shipra Khanna</cite>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<section>
+    <video height="700"  autoplay muted style="width:100%;">
+        <source src="~/food.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+<section class="faq-section">
+    <div class="container">
+        <h1 style="font-size:60px;">Frequently Asked Questions</h1>
+        <br />
+        <div class="faq">
+            <div class="faq-item">
+                <h2>How to Order?</h2>
+                <p>Ordering your favorite food is as easy as a click of a button. Simply browse our menu, select your items, and proceed to checkout.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <div class="faq-item">
+                <h2>Delivery Time?</h2>
+                <p>We strive to deliver your delicious meals to your doorstep in record time. Sit back, relax, and get ready to enjoy your feast!</p>
+            </div>
+        </div>
+        <div class="faq">
+            <div class="faq-item">
+                <h2>Payment Options?</h2>
+                <p>We offer a variety of secure payment options to make your checkout experience smooth and hassle-free. Choose your preferred method and complete your order with confidence.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <div class="faq-item">
+                <h2>Feedback?</h2>
+                <p>We value your feedback! Share your experience with us after checkout and help us improve our service to serve you better.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<section class="community-section">
+    <div class="container">
+        <h1 class="community-title" style="font-size:60px; color:black;">Join Our Foodiezz Community</h1>
+        <br />
+        <ul class="community-icons">
+            <li class="hello"><img width="96" height="96" src="https://img.icons8.com/color/96/whatsapp--v5.png" alt="whatsapp--v5" /></li>
+            <li class="hello"><img width="96" height="96" src="https://img.icons8.com/color/96/facebook-new.png" alt="facebook-new" /></li>
+            <li class="hello"><img width="96" height="96" src="https://img.icons8.com/fluency/96/instagram-new.png" alt="instagram-new" /></li>
+            <li class="hello"><img width="96" height="96" src="https://img.icons8.com/color/96/twitterx--v2.png" alt="twitterx--v2" /></li>
+        </ul>
+    </div>
+</section>
+<br />
+
+<!-- Contact Section -->
+@* <section class="contact-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Contact Us</h2>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <p>Have any questions or feedback? Reach out to us!</p>
+                <div class="contact-info">
+                    <p>Email: info@foodordering.com</p>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Address: 123 Main St, City</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> *@
 @* <script>
     function showNotification(message) {
         var notificationBanner = document.getElementById("notificationBanner");
