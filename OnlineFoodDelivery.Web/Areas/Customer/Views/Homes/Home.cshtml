@@ -60,7 +60,9 @@
 
     .services-section {
         background-color: rgba(0, 0, 0, 0.1);
-        padding: 100px 0;
+        
+        width: 100%;
+        height: 600px;
     }
 
     .service {
@@ -113,9 +115,8 @@
         }
 
     .contact-section {
-        background-color: #007bff;
+        /* background-color: #cfdbd5; */
         color: white;
-        padding: 100px 0;
         text-align: center;
     }
 
@@ -221,8 +222,8 @@
             }
         .move{
         position: absolute;
-        top: 660px;
-        left: 150px;
+        top: 760px;
+        left: 200px;
         width: 68%;
         }
 </style>
@@ -248,26 +249,30 @@
     <iframe src="https://lottie.host/embed/fd01e59d-cca5-4bf4-8d37-0a88719da55f/Gx0WrwuodT.json" width="350" height="350" style="margin-left: 20px; margin-top: 30px;"></iframe>
 </div>
 <br />
-<section id="services" class="services-section py-5">
-    <div class="container">
-        <img src="~/foodphoto.jpeg" alt="foodphoto" style="width:100%; opacity:0.2;"/>
+<br />
+<br />
+<br />
+<br />
+<section id="services" class="services-section">
+    <div class="container" style="padding:0;">
+        <img src="~/foodphoto.jpeg" alt="foodphoto" style="width:100%; height:600px; opacity:0.35;"/>
         <div class="move">
         <h2 class="text-center mb-5" style="font-size:60px;">Our Services</h2>
         <div class="row">
             <div class="col-md-4">
-                <div class="service text-center p-4 shadow">
+                <div class="service text-center p-4 border">
                     <h3 class="mb-3">Online Ordering</h3>
                     <p class="mb-0">Conveniently order your favorite dishes online.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="service text-center p-4 shadow">
+                <div class="service text-center p-4 border">
                     <h3 class="mb-3">Delivery</h3>
                     <p class="mb-0">Enjoy doorstep delivery of your food.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="service text-center p-4 shadow">
+                <div class="service text-center p-4 border">
                     <h3 class="mb-3">Quality Food</h3>
                     <p class="mb-0">Experience delicious and hygienic meals.</p>
                 </div>
@@ -364,23 +369,44 @@
     </div>
 </section>
 <br />
-
+<br />
+<br />
+<br />
+<hr />
 <!-- Contact Section -->
-@* <section class="contact-section">
+<section class="contact-section">
     <div class="container">
-        <h2 class="text-center mb-5">Contact Us</h2>
+        <h2 class="text-center mb-5" style="font-size: 60px;">Contact Us</h2>
+        <p class="text-center mb-5" style="font-size: 30px;">We can help. Our team of experts is on hand to answer your questions.</p>
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <p>Have any questions or feedback? Reach out to us!</p>
+            <div class="col-md-6">
                 <div class="contact-info">
-                    <p>Email: info@foodordering.com</p>
+                    <div class="service text-center p-4 border">
+                    <p>Email: admin@gmail.com</p>
                     <p>Phone: 123-456-7890</p>
-                    <p>Address: 123 Main St, City</p>
+                    <p>Address: 123 Main St, Vadodara</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="service text-center p-4 border" style="margin-top:30px;">
+                    <p>Reach Us!</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="userAddress" placeholder="Enter your email">
+                    </div>
+                    <br />
+                    <button type="submit" class="btn-sm">Submit</button>
+                </form>
                 </div>
             </div>
         </div>
+        <hr>
+        <p style="margin-bottom:-3rem;">By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy, and Content Policies. All trademarks are properties of their respective owners. 2008-2024 © Foodiezz™ Ltd. All rights reserved.</p>
+        @* <a asp-area="Customer" asp-controller="Homes" asp-action="Privacy" style="color:white;">Privacy Policy</a> *@
     </div>
-</section> *@
+</section>
+
 @* <script>
     function showNotification(message) {
         var notificationBanner = document.getElementById("notificationBanner");
