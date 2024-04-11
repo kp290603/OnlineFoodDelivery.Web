@@ -1,36 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "Details";
+﻿@{
+    ViewData["Title"] = "Checkout";
 }
+
 @model List<OnlineFoodDelivery.Web.ViewModels.CartItemViewModel>
-<h2>Checkout</h2>
 
-<table class="table" style="color:white">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Item.Title</td>
-                <td>@item.Item.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Item.Price * item.Quantity)</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div>
-    <h4>Total Amount: ₹@ViewData["TotalAmount"]</h4>
+<div class="row">
+    <div class="col-md-6">
+        <h2>User Details</h2>
+        <!-- Your user details form goes here -->
+        <form>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="text" class="form-control" id="contact" placeholder="Enter your contact number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Order Summary</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Total Amount: <span class="float-right">₹@ViewData["TotalAmount"]</span></li>
+            <li class="list-group-item">Expected Delivery Time: <span class="float-right">2 hours</span></li>
+        </ul>
+        
+    </div>
+    <div class="text-center mt-3">
+        <a href="@Url.Action("PaymentGateway", "Carts")" class="btn btn-primary">Proceed To Pay</a>
+    </div>
 </div>
-
-<a href="@Url.Action("PaymentGateway", "Carts")" class="btn btn-primary">Proceed To Pay</a>

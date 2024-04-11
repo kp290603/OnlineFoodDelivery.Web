@@ -64,7 +64,7 @@
             seconds--;
             document.getElementById("countdown").textContent = seconds;
             if (seconds <= 0) {
-                window.location.href = '@Url.Action("Index", "Homes")'; // Redirect to homepage
+                window.location.href = '@Url.Action("Home", "Homes")'; // Redirect to homepage
             }
         }, 1000);
     </script>
