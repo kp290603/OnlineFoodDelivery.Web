@@ -32,24 +32,112 @@
             display: flex;
             justify-content: center;
             margin-bottom: 20px; /* Add spacing below buttons */
+            height: 100px;
         }
-
-        .mood-button {
+        .happyspan{
+            display:none;
+        }
+        .happyspan:hover{
+            display:inline;
+        }
+        .happy {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #4caf50; /* Green button color */
-            color: #fff; /* White text color */
+            background-color: #edf2f4; /* Green button color */
+            color: #000; /* White text color */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin: 0 10px; /* Add margin between buttons */
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+            transition: all 0.3s ease; /* Smooth transition on hover */
+        }
+        .happy:hover {
+            transform:scale(1.3);
+                background-color: #a0c4ff;
+        }
+        .happy:hover .happyspan{
+            display:block;
+        }
+        .sad {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #edf2f4; /* Green button color */
+            color: #000; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+            transition: all 0.3s ease; /* Smooth transition on hover */
         }
 
-            .mood-button:hover {
-                background-color: #45a049; /* Darker green on hover */
-            }
+        .sad:hover {
+            transform: scale(1.3);
+            background-color: #ddbea9;
+        }
 
+            .sad:hover .happyspan {
+                display: block;
+            }
+        .stressed {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #edf2f4; /* Green button color */
+            color: #000; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+            transition: all 0.3s ease; /* Smooth transition on hover */
+        }
+
+        .stressed:hover {
+            transform: scale(1.3);
+                background-color: #e4c1f9;
+        }
+
+        .stressed:hover .happyspan {
+            display: block;
+        }
+        .excited {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #edf2f4; /* Green button color */
+            color: #000; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+            transition: all 0.3s ease; /* Smooth transition on hover */
+        }
+
+        .excited:hover {
+            transform: scale(1.3);
+                background-color: #48cae4;
+        }
+
+        .excited:hover .happyspan {
+            display: block;
+        }
+        .hungry {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #edf2f4; /* Green button color */
+            color: #000; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px; /* Add margin between buttons */
+            transition: all 0.3s ease; /* Smooth transition on hover */
+        }
+
+        .hungry:hover {
+            transform: scale(1.3);
+                background-color: #f28482;
+        }
+
+        .hungry:hover .happyspan {
+            display: block;
+        }
         .result {
             text-align: center;
         }
@@ -72,11 +160,21 @@
     <div class="container1">
         <h1>Food Mood Suggestions</h1>
         <div class="mood-buttons">
-            <button class="mood-button" onclick="getSuggestions('happy')">Happy</button>
-            <button class="mood-button" onclick="getSuggestions('sad')">Sad</button>
-            <button class="mood-button" onclick="getSuggestions('hungry')">Hungry</button>
-            <button class="mood-button" onclick="getSuggestions('excited')">Excited</button>
-            <button class="mood-button" onclick="getSuggestions('stressed')">Stressed</button>
+            <button class="happy" onclick="getSuggestions('happy')"><span class="happyspan">Happy</span>
+                <img width="64" height="64" src="https://img.icons8.com/dusk/64/happy.png" alt="happy" />
+            </button>
+            <button class="sad" onclick="getSuggestions('sad')"><span class="happyspan">Sad</span>
+                <img width="64" height="64" src="https://img.icons8.com/dusk/64/sad.png" alt="sad" />
+            </button>
+            <button class="hungry" onclick="getSuggestions('hungry')"><span class="happyspan">Hungry</span>
+                <img width="64" height="64" src="https://img.icons8.com/arcade/64/hungry.png" alt="hungry" />
+            </button>
+            <button class="excited" onclick="getSuggestions('excited')"><span class="happyspan">Excited</span>
+                <img width="64" height="64" src="https://img.icons8.com/emoji/64/star-struck.png" alt="star-struck" />
+            </button>
+            <button class="stressed" onclick="getSuggestions('stressed')"><span class="happyspan">Stressed</span>
+                <img width="64" height="64" src="https://img.icons8.com/emoji/64/fearful-face.png" alt="fearful-face" />
+            </button>
         </div>
         <div class="result" id="suggestions">
             <!-- Suggestions will be displayed here -->
@@ -92,19 +190,19 @@
             var messages = [];
             switch (mood) {
                 case 'happy':
-                    messages = ["How about some ice cream?", "How about a slice of cake?", "Maybe some cookies?"];
+                    messages = ["How about blueberry cheese cake?", "How about tiramisu tub?", "Maybe cappuccino?"];
                     break;
                 case 'sad':
-                    messages = ["Maybe some comfort food like mac and cheese?", "How about a warm bowl of soup?", "Some chocolate might cheer you up!"];
+                    messages = ["Maybe some comfort food like pizza?", "How about a warm bowl of soup?", "How about paneer butter masala!"];
                     break;
                 case 'hungry':
-                    messages = ["A hearty burger might do the trick!", "How about a big bowl of pasta?", "Maybe some tacos?"];
+                    messages = ["A hearty burger might do the trick!", "How about a big bowl of pasta?", "Maybe some enchiladas?"];
                     break;
                 case 'excited':
-                    messages = ["Treat yourself with some pizza!", "How about a fancy dinner?", "Maybe some sushi?"];
+                    messages = ["Treat yourself with some pizza!", "How about a fancy dinner?", "Maybe quesadilla?"];
                     break;
                 case 'stressed':
-                    messages = ["Relax with some chocolate!", "How about a cup of tea?", "Maybe a soothing bowl of oatmeal?"];
+                    messages = ["Relax with some coffee!", "How about a cup of cappuccino?", "Maybe a soothing bowl of soup"];
                     break;
                 default:
                     messages = ["Hmm... something went wrong. Please try again later."];

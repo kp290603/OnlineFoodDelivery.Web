@@ -67,12 +67,10 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             bool found = false;
 
-            // Check if the item is already in the cart
             foreach (var cartItem in Cart)
             {
                 if (cartItem.Item.Id == PId)
                 {
-                    // If the item is found, increase its quantity
                     cartItem.Quantity++;
                     found = true;
                     break;
@@ -81,14 +79,12 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             if (!found)
             {
-                // If the item is not found in the cart, add it to the cart
                 CartItemViewModel item = new CartItemViewModel();
                 item.Item = _context.Items.Find(PId);
                 item.Quantity = 1;
                 Cart.Add(item);
             }
 
-            // Save the updated cart back to the session
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(Cart));
 
             return RedirectToAction("Index");
@@ -100,18 +96,14 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             if (cart != null)
             {
-                // Retrieve cart from session
                 List<CartItemViewModel> Cart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(cart);
 
-                // Find the item to update quantity
                 var itemToUpdate = Cart.FirstOrDefault(item => item.Item.Id == PId);
 
                 if (itemToUpdate != null)
                 {
-                    // Update the quantity
                     itemToUpdate.Quantity = Quantity;
 
-                    // Save the updated cart back to the session
                     HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(Cart));
                 }
             }
@@ -124,18 +116,14 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
 
             if (cart != null)
             {
-                // Retrieve cart from session
                 List<CartItemViewModel> Cart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(cart);
 
-                // Find the item to remove from the cart
                 var itemToRemove = Cart.FirstOrDefault(item => item.Item.Id == PId);
 
                 if (itemToRemove != null)
                 {
-                    // Remove the item from the cart
                     Cart.Remove(itemToRemove);
 
-                    // Save the updated cart back to the session
                     HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(Cart));
                 }
             }
@@ -147,7 +135,6 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
             var cart = HttpContext.Session.GetString("Cart");
             List<CartItemViewModel> Cart = cart != null ? JsonConvert.DeserializeObject<List<CartItemViewModel>>(cart) : new List<CartItemViewModel>();
 
-            // Calculate total amount
             double totalAmount = 0;
             foreach (var cartItem in Cart)
             {
@@ -227,10 +214,6 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
         [Authorize]
         public IActionResult ConfirmOrder()
         {
-            // Process order confirmation logic here...
-            // Update database, send confirmation email, etc.
-
-            // Clear the cart session after successful order
             HttpContext.Session.Remove("Cart");
 
             return RedirectToAction("OrderConfirmation");
@@ -239,7 +222,6 @@ namespace OnlineFoodDelivery.Web.Areas.Customer.Controllers
         public IActionResult OrderConfirmation()
         {
             HttpContext.Session.Clear();
-            // Display order confirmation view
             return View();
         }
         public IActionResult DownloadBillingDetails()

@@ -1,46 +1,4 @@
-﻿@* @model IEnumerable<OnlineFoodDelivery.Web.ViewModels.ItemViewModel>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<h1 class="mb-4">Food Items</h1>
-
-
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-
-                <div class="card-body">
-                    <h5 class="card-title">@item.Title</h5>
-                    <p class="card-text">
-                        @{
-                            if (item.Image != null)
-                            {
-                                var base64 = Convert.ToBase64String(item.Image);
-                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-                                <img src="@imgsrc" height="150" width="150" style="border-radius:100%; align-items:center" />
-                            }
-                        }
-                    </p>
-                    <p class="card-text">@item.Description</p>
-                    <p class="card-text"><strong>Price: </strong>@item.Price</p>
-                </div>
-                <div class="card-footer">
-                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">Details</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-
- *@
- @model OnlineFoodDelivery.Web.ViewModels.ItemCategoryViewModel
+﻿ @model OnlineFoodDelivery.Web.ViewModels.ItemCategoryViewModel
 
 @{
     ViewData["Title"] = "Items";
@@ -255,3 +213,46 @@
 
 </body>
 </html>
+
+@* @model IEnumerable<OnlineFoodDelivery.Web.ViewModels.ItemViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1 class="mb-4">Food Items</h1>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">
+                        @{
+                            if (item.Image != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.Image);
+                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                <img src="@imgsrc" height="150" width="150" style="border-radius:100%; align-items:center" />
+                            }
+                        }
+                    </p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text"><strong>Price: </strong>@item.Price</p>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary btn-sm">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+ *@
